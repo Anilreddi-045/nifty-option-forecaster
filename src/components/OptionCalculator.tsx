@@ -58,14 +58,18 @@ const OptionCalculator = ({ onCalculate, model }: OptionCalculatorProps) => {
     const volatilityDecimal = values.volatility / 100;
     const interestRateDecimal = values.interestRate / 100;
     
-    // Calculate option prices for a range of underlying prices to display on chart
-    const priceStep = (values.targetPrice - values.currentPrice) / 10;
-    const priceRange = Array.from({ length: 11 }, (_, i) => 
-      values.currentPrice + priceStep * i
-    );
+    // Generate a price range that ensures we show both below and above the strike price
+    // Determine the minimum and maximum prices to show
+    const minPrice = Math.min(values.currentPrice, values.targetPrice, values.strikePrice) * 0.9;
+    const maxPrice = Math.max(values.currentPrice, values.targetPrice, values.strikePrice) * 1.1;
     
-    const optionPrices = priceRange.map(price => {
-      return {
+    // Create 21 evenly spaced price points
+    const pricePoints = [];
+    const priceStep = (maxPrice - minPrice) / 20;
+    
+    for (let i = 0; i <= 20; i++) {
+      const price = minPrice + priceStep * i;
+      pricePoints.push({
         underlyingPrice: price,
         optionPrice: calculateOptionPrice({
           underlyingPrice: price,
@@ -76,12 +80,29 @@ const OptionCalculator = ({ onCalculate, model }: OptionCalculatorProps) => {
           optionType: values.optionType,
           model: model
         })
-      };
-    });
+      });
+    }
     
     // Get the current and target option prices
-    const currentOptionPrice = optionPrices[0].optionPrice;
-    const targetOptionPrice = optionPrices[optionPrices.length - 1].optionPrice;
+    const currentOptionPrice = calculateOptionPrice({
+      underlyingPrice: values.currentPrice,
+      strikePrice: values.strikePrice,
+      timeToExpiry: values.daysToExpiry / 365,
+      volatility: volatilityDecimal,
+      interestRate: interestRateDecimal,
+      optionType: values.optionType,
+      model: model
+    });
+    
+    const targetOptionPrice = calculateOptionPrice({
+      underlyingPrice: values.targetPrice,
+      strikePrice: values.strikePrice,
+      timeToExpiry: values.daysToExpiry / 365,
+      volatility: volatilityDecimal,
+      interestRate: interestRateDecimal,
+      optionType: values.optionType,
+      model: model
+    });
     
     setCalculatedPrice(targetOptionPrice);
     
@@ -93,7 +114,7 @@ const OptionCalculator = ({ onCalculate, model }: OptionCalculatorProps) => {
       optionType: values.optionType,
       currentOptionPrice,
       targetOptionPrice,
-      pricePoints: optionPrices,
+      pricePoints: pricePoints,
       percentChange: ((targetOptionPrice - currentOptionPrice) / currentOptionPrice * 100).toFixed(2)
     });
   };

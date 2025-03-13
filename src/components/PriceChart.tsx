@@ -7,7 +7,8 @@ import {
   CartesianGrid, 
   Tooltip, 
   Legend, 
-  ResponsiveContainer 
+  ResponsiveContainer,
+  ReferenceLine
 } from 'recharts';
 import { 
   Card,
@@ -99,6 +100,12 @@ const PriceChart = ({ optionData }: PriceChartProps) => {
             labelFormatter={(value) => `Nifty Price: ₹${value}`}
           />
           <Legend />
+          <ReferenceLine 
+            x={optionData.strikePrice} 
+            stroke="#ff7300" 
+            strokeDasharray="3 3"
+            label={{ value: `Strike: ₹${optionData.strikePrice}`, position: 'top' }}
+          />
           <Line 
             type="monotone" 
             dataKey="optionPrice" 
