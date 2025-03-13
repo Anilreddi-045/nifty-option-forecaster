@@ -99,20 +99,27 @@ const StrategyChart = ({ strategyData }: StrategyChartProps) => {
     return "Custom Strategy";
   };
   
+  // Prepare data with color information for payoff line
+  const coloredPayoffPoints = strategyData.payoffPoints.map(point => ({
+    ...point,
+    // Use this to determine the stroke color for the line segments
+    lineColor: point.payoff >= 0 ? "#10b981" : "#ef4444" // green for profit, red for loss
+  }));
+  
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <Card className="bg-gray-50">
           <CardContent className="pt-6 text-center">
             <h3 className="text-sm font-medium text-gray-500">Max Profit</h3>
-            <p className="text-2xl font-bold text-finance-gain">₹{formattedMaxProfit}</p>
+            <p className="text-2xl font-bold text-green-500">₹{formattedMaxProfit}</p>
           </CardContent>
         </Card>
         
         <Card className="bg-gray-50">
           <CardContent className="pt-6 text-center">
             <h3 className="text-sm font-medium text-gray-500">Max Loss</h3>
-            <p className="text-2xl font-bold text-finance-loss">₹{formattedMaxLoss}</p>
+            <p className="text-2xl font-bold text-red-500">₹{formattedMaxLoss}</p>
           </CardContent>
         </Card>
         
@@ -156,8 +163,16 @@ const StrategyChart = ({ strategyData }: StrategyChartProps) => {
             label={{ value: 'Profit/Loss (₹)', angle: -90, position: 'insideLeft' }}
           />
           <Tooltip 
-            formatter={(value: number) => [`₹${value.toFixed(2)}`, 'Profit/Loss']}
+            formatter={(value: number) => [
+              `₹${value.toFixed(2)}`, 
+              'Profit/Loss',
+              value >= 0 ? 'green' : 'red'
+            ]}
             labelFormatter={(value) => `Nifty Price: ₹${value}`}
+            contentStyle={({ payoff }: any) => ({
+              backgroundColor: '#fff',
+              border: '1px solid #ccc'
+            })}
           />
           <Legend />
           <ReferenceLine 
@@ -172,40 +187,82 @@ const StrategyChart = ({ strategyData }: StrategyChartProps) => {
             label={{ value: `Current: ₹${strategyData.currentPrice}`, position: 'top' }}
           />
           <defs>
-            <linearGradient id="profitArea" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#10b981" stopOpacity={0.1}/>
+            <linearGradient id="profitGradient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="#10b981" stopOpacity={0.2}/>
               <stop offset="95%" stopColor="#10b981" stopOpacity={0.1}/>
             </linearGradient>
-            <linearGradient id="lossArea" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#ef4444" stopOpacity={0.1}/>
+            <linearGradient id="lossGradient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="#ef4444" stopOpacity={0.2}/>
               <stop offset="95%" stopColor="#ef4444" stopOpacity={0.1}/>
             </linearGradient>
           </defs>
+          
+          {/* Profit Area (Above 0) */}
           <Area 
             type="monotone" 
             dataKey="payoff" 
-            fill="url(#profitArea)" 
+            fill="url(#profitGradient)" 
             stroke="none"
             activeDot={false}
             baseValue={0}
             isAnimationActive={false}
+            fillOpacity={1}
           />
+          
+          {/* Loss Area (Below 0) */}
           <Area 
             type="monotone" 
             dataKey="payoff" 
-            fill="url(#lossArea)" 
+            fill="url(#lossGradient)" 
             stroke="none"
             activeDot={false}
             baseValue={0}
             isAnimationActive={false}
+            fillOpacity={1}
           />
+          
+          {/* Payoff line with conditional coloring */}
           <Line 
             type="monotone" 
             dataKey="payoff" 
             name="Profit/Loss" 
-            stroke="#3b82f6" 
+            stroke="#000"
+            dot={{ fill: (entry: any) => entry.payoff >= 0 ? '#10b981' : '#ef4444' }}
             activeDot={{ r: 8 }} 
             strokeWidth={2}
+            connectNulls
+            strokeDasharray="0 0"
+            legendType="circle"
+            // Apply color to each segment based on profit/loss
+            strokeOpacity={0} // Hide the main line
+          />
+          
+          {/* Profit Line (>=0) */}
+          <Line 
+            type="monotone" 
+            dataKey={(dataPoint: any) => dataPoint.payoff >= 0 ? dataPoint.payoff : null}
+            name="Profit" 
+            stroke="#10b981" 
+            dot={false}
+            activeDot={false}
+            strokeWidth={2}
+            connectNulls
+            strokeDasharray="0 0"
+            legendType="none"
+          />
+          
+          {/* Loss Line (<0) */}
+          <Line 
+            type="monotone" 
+            dataKey={(dataPoint: any) => dataPoint.payoff < 0 ? dataPoint.payoff : null}
+            name="Loss" 
+            stroke="#ef4444" 
+            dot={false}
+            activeDot={false}
+            strokeWidth={2}
+            connectNulls
+            strokeDasharray="0 0"
+            legendType="none"
           />
         </ComposedChart>
       </ResponsiveContainer>
@@ -214,8 +271,8 @@ const StrategyChart = ({ strategyData }: StrategyChartProps) => {
         <h3 className="font-bold mb-2">Strategy Analysis:</h3>
         <p>
           This {strategyData.strategyName} consists of {strategyData.legs.length} legs 
-          and has a maximum profit potential of <strong>₹{formattedMaxProfit}</strong> and 
-          maximum loss of <strong>₹{formattedMaxLoss}</strong>.
+          and has a maximum profit potential of <strong className="text-green-500">₹{formattedMaxProfit}</strong> and 
+          maximum loss of <strong className="text-red-500">₹{formattedMaxLoss}</strong>.
         </p>
         <p className="mt-2">
           {breakEvenPoints.length > 0 ? (

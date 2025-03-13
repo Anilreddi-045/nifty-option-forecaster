@@ -41,6 +41,18 @@ const PriceChart = ({ optionData }: PriceChartProps) => {
   const isInTheMoney = (isCallOption && isTargetAboveStrike) || 
                         (!isCallOption && !isTargetAboveStrike);
   
+  // Prepare data for coloring the chart
+  const coloredPricePoints = optionData.pricePoints.map((point, index, array) => {
+    // Determine if this price point represents a profit or loss compared to current
+    const isProfitablePoint = index > 0 && 
+      point.optionPrice > array[0].optionPrice;
+      
+    return {
+      ...point,
+      lineColor: isProfitablePoint ? "#10b981" : "#ef4444"
+    };
+  });
+  
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -56,11 +68,11 @@ const PriceChart = ({ optionData }: PriceChartProps) => {
             <h3 className="text-sm font-medium text-gray-500">Price Change</h3>
             <div className="flex items-center justify-center">
               {isPriceIncrease ? (
-                <ArrowUp className="h-5 w-5 text-finance-gain mr-1" />
+                <ArrowUp className="h-5 w-5 text-green-500 mr-1" />
               ) : (
-                <ArrowDown className="h-5 w-5 text-finance-loss mr-1" />
+                <ArrowDown className="h-5 w-5 text-red-500 mr-1" />
               )}
-              <p className={`text-2xl font-bold ${isPriceIncrease ? 'text-finance-gain' : 'text-finance-loss'}`}>
+              <p className={`text-2xl font-bold ${isPriceIncrease ? 'text-green-500' : 'text-red-500'}`}>
                 {optionData.percentChange}%
               </p>
             </div>
@@ -106,14 +118,82 @@ const PriceChart = ({ optionData }: PriceChartProps) => {
             strokeDasharray="3 3"
             label={{ value: `Strike: ₹${optionData.strikePrice}`, position: 'top' }}
           />
+          <ReferenceLine 
+            x={optionData.currentPrice} 
+            stroke="#666" 
+            strokeDasharray="3 3"
+            label={{ value: `Current: ₹${optionData.currentPrice}`, position: 'bottom' }}
+          />
+          <ReferenceLine 
+            x={optionData.targetPrice} 
+            stroke={isPriceIncrease ? "#10b981" : "#ef4444"} 
+            strokeDasharray="3 3"
+            label={{ value: `Target: ₹${optionData.targetPrice}`, position: 'top' }}
+          />
+          
+          {/* Option price line */}
           <Line 
             type="monotone" 
             dataKey="optionPrice" 
             name="Option Price" 
             stroke="#3b82f6" 
+            dot={(entry, index) => {
+              // Highlight key price points
+              if (Math.abs(entry.underlyingPrice - optionData.currentPrice) < 1 || 
+                  Math.abs(entry.underlyingPrice - optionData.targetPrice) < 1 ||
+                  Math.abs(entry.underlyingPrice - optionData.strikePrice) < 1) {
+                return { r: 6, fill: "#3b82f6", strokeWidth: 1 };
+              }
+              return false; // No dot for other points
+            }}
             activeDot={{ r: 8 }} 
             strokeWidth={2}
           />
+          
+          {/* Additional line segments to show profit/loss from current to target */}
+          {isPriceIncrease && (
+            <Line 
+              type="linear" 
+              dataKey="optionPrice"
+              name="Profit" 
+              stroke="#10b981"
+              strokeWidth={5}
+              activeDot={false}
+              dot={false}
+              connectNulls
+              isAnimationActive={false}
+              legendType="none"
+              // Filter points to only show the line from current to target price
+              data={optionData.pricePoints.filter(p => 
+                (optionData.targetPrice > optionData.currentPrice) ? 
+                  (p.underlyingPrice >= optionData.currentPrice && p.underlyingPrice <= optionData.targetPrice) :
+                  (p.underlyingPrice <= optionData.currentPrice && p.underlyingPrice >= optionData.targetPrice)
+              )}
+              strokeOpacity={0.5}
+            />
+          )}
+          
+          {!isPriceIncrease && (
+            <Line 
+              type="linear" 
+              dataKey="optionPrice"
+              name="Loss" 
+              stroke="#ef4444"
+              strokeWidth={5}
+              activeDot={false}
+              dot={false}
+              connectNulls
+              isAnimationActive={false}
+              legendType="none"
+              // Filter points to only show the line from current to target price
+              data={optionData.pricePoints.filter(p => 
+                (optionData.targetPrice > optionData.currentPrice) ? 
+                  (p.underlyingPrice >= optionData.currentPrice && p.underlyingPrice <= optionData.targetPrice) :
+                  (p.underlyingPrice <= optionData.currentPrice && p.underlyingPrice >= optionData.targetPrice)
+              )}
+              strokeOpacity={0.5}
+            />
+          )}
         </LineChart>
       </ResponsiveContainer>
       
@@ -122,7 +202,11 @@ const PriceChart = ({ optionData }: PriceChartProps) => {
         <p>
           If Nifty moves from <strong>₹{optionData.currentPrice.toLocaleString()}</strong> to <strong>₹{optionData.targetPrice.toLocaleString()}</strong>, 
           this {optionData.optionType.toUpperCase()} option with strike price ₹{optionData.strikePrice.toLocaleString()} will 
-          {isPriceIncrease ? ' increase' : ' decrease'} in value by approximately <strong>{optionData.percentChange}%</strong>.
+          <span className={isPriceIncrease ? 'text-green-500 font-bold' : 'text-red-500 font-bold'}>
+            {isPriceIncrease ? ' increase' : ' decrease'}
+          </span> in value by approximately <strong className={isPriceIncrease ? 'text-green-500' : 'text-red-500'}>
+            {optionData.percentChange}%
+          </strong>.
         </p>
         <p className="mt-2">
           At the target price, this option will be <strong>{isInTheMoney ? 'in-the-money' : 'out-of-the-money'}</strong>.
