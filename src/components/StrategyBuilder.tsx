@@ -36,9 +36,10 @@ import {
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Plus, Trash2, Copy } from "lucide-react";
+import { Plus, Trash2, Lightbulb } from "lucide-react";
 import { Strategy, StrategyLeg, predefinedStrategies } from "@/lib/strategyCalculations";
 import { toast } from "sonner";
+import MarketRangePredictor from "./MarketRangePredictor";
 
 const legSchema = z.object({
   optionType: z.enum(["call", "put"]),
@@ -131,6 +132,20 @@ const StrategyBuilder = ({ onCalculate, currentNiftyPrice }: StrategyBuilderProp
         if (legIndex === 1) strike = Math.round(currentNiftyPrice * 0.95);
         if (legIndex === 2) strike = Math.round(currentNiftyPrice * 1.05);
         if (legIndex === 3) strike = Math.round(currentNiftyPrice * 1.1);
+      } else if (strategy.name === "Butterfly Spread") {
+        const legIndex = strategy.legs.indexOf(leg);
+        if (legIndex === 0) strike = Math.round(currentNiftyPrice * 0.95);
+        if (legIndex === 1) strike = Math.round(currentNiftyPrice);
+        if (legIndex === 2) strike = Math.round(currentNiftyPrice * 1.05);
+      } else if (strategy.name === "Strangle") {
+        if (leg.optionType === "call") {
+          strike = Math.round(currentNiftyPrice * 1.05);
+        } else {
+          strike = Math.round(currentNiftyPrice * 0.95);
+        }
+      } else if (strategy.name.includes("Optimized")) {
+        // For optimized strategies, use the strikes as provided
+        return leg;
       }
       
       return { ...leg, strikePrice: strike };
@@ -158,6 +173,13 @@ const StrategyBuilder = ({ onCalculate, currentNiftyPrice }: StrategyBuilderProp
 
   return (
     <div className="space-y-6">
+      <div className="mb-4">
+        <MarketRangePredictor 
+          currentPrice={currentNiftyPrice}
+          onStrategySelect={loadPredefinedStrategy}
+        />
+      </div>
+      
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <h3 className="text-lg font-medium mb-2">Predefined Strategies</h3>
