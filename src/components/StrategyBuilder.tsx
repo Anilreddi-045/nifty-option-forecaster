@@ -76,17 +76,19 @@ const StrategyBuilder = ({ onCalculate, currentNiftyPrice }: StrategyBuilderProp
   });
 
   const addLeg = () => {
-    setLegs([...legs, { 
+    const newLeg: StrategyLeg = { 
       optionType: "call", 
       strikePrice: currentNiftyPrice, 
       position: "long", 
       quantity: 1 
-    }]);
+    };
+    
+    setLegs([...legs, newLeg]);
     
     const currentLegs = form.getValues("legs");
     form.setValue("legs", [
       ...currentLegs, 
-      { optionType: "call", strikePrice: currentNiftyPrice, position: "long", quantity: 1 }
+      newLeg
     ]);
   };
 
@@ -145,7 +147,7 @@ const StrategyBuilder = ({ onCalculate, currentNiftyPrice }: StrategyBuilderProp
         }
       } else if (strategy.name.includes("Optimized")) {
         // For optimized strategies, use the strikes as provided
-        return leg;
+        return { ...leg };
       }
       
       return { ...leg, strikePrice: strike };
@@ -283,7 +285,12 @@ const StrategyBuilder = ({ onCalculate, currentNiftyPrice }: StrategyBuilderProp
                   <FormItem>
                     <FormLabel>Option Type</FormLabel>
                     <Select
-                      onValueChange={field.onChange}
+                      onValueChange={(value) => {
+                        field.onChange(value);
+                        const newLegs = [...legs];
+                        newLegs[index].optionType = value as "call" | "put";
+                        setLegs(newLegs);
+                      }}
                       defaultValue={field.value}
                     >
                       <FormControl>

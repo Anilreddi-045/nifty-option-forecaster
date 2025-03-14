@@ -124,7 +124,7 @@ const Index = () => {
           <h2 className="text-xl font-bold mb-4 text-finance-dark">
             {activeTab === "single" ? 
               "About Option Pricing" : 
-              "About Option Strategies"
+              "Market Scenarios & Option Strategies"
             }
           </h2>
           <div className="prose max-w-none">
@@ -142,15 +142,73 @@ const Index = () => {
             ) : (
               <>
                 <p>
-                  Option strategies are combinations of options and sometimes the underlying asset that create unique risk-reward profiles. Traders use strategies to express specific market views with controlled risk.
+                  Option strategies are combinations of options and sometimes the underlying asset that create unique risk-reward profiles. 
+                  Different market scenarios call for different strategies:
                 </p>
-                <h3 className="text-lg font-semibold mt-4">Common Strategies:</h3>
-                <ul className="list-disc pl-5">
-                  <li><strong>Bull Call Spread:</strong> Buy a call and sell a higher strike call. Limited risk and reward, profits from moderate upward moves.</li>
-                  <li><strong>Bear Put Spread:</strong> Buy a put and sell a lower strike put. Limited risk and reward, profits from moderate downward moves.</li>
-                  <li><strong>Straddle:</strong> Buy a call and put at the same strike. Profits from large price movements in either direction.</li>
-                  <li><strong>Iron Condor:</strong> Sell an out-of-the-money call spread and put spread. Profits when price remains within a range.</li>
-                </ul>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                  <div className="border rounded-md p-3 bg-blue-50">
+                    <h3 className="text-lg font-semibold flex items-center text-blue-700">
+                      <span className="bg-blue-200 p-1 rounded-full mr-2">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <rect x="3" y="3" width="18" height="18" rx="2" />
+                          <path d="M9 3v18" />
+                          <path d="M15 3v18" />
+                        </svg>
+                      </span>
+                      Range-Bound Market
+                    </h3>
+                    <p className="text-sm mt-1">
+                      When you expect the market to stay within a specific range. Iron Condors, Butterflies, and Short Straddles profit from this.
+                    </p>
+                  </div>
+                  
+                  <div className="border rounded-md p-3 bg-green-50">
+                    <h3 className="text-lg font-semibold flex items-center text-green-700">
+                      <span className="bg-green-200 p-1 rounded-full mr-2">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+                          <polyline points="17 6 23 6 23 12" />
+                        </svg>
+                      </span>
+                      Trending Upward
+                    </h3>
+                    <p className="text-sm mt-1">
+                      For bullish markets. Bull Call Spreads, Call Debit Spreads, and Bull Put Spreads can capture upside movement.
+                    </p>
+                  </div>
+                  
+                  <div className="border rounded-md p-3 bg-red-50">
+                    <h3 className="text-lg font-semibold flex items-center text-red-700">
+                      <span className="bg-red-200 p-1 rounded-full mr-2">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <polyline points="23 18 13.5 8.5 8.5 13.5 1 6" />
+                          <polyline points="17 18 23 18 23 12" />
+                        </svg>
+                      </span>
+                      Trending Downward
+                    </h3>
+                    <p className="text-sm mt-1">
+                      For bearish markets. Bear Put Spreads, Put Debit Spreads, and Bear Call Spreads can profit from downward moves.
+                    </p>
+                  </div>
+                  
+                  <div className="border rounded-md p-3 bg-purple-50">
+                    <h3 className="text-lg font-semibold flex items-center text-purple-700">
+                      <span className="bg-purple-200 p-1 rounded-full mr-2">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                        </svg>
+                      </span>
+                      Highly Volatile
+                    </h3>
+                    <p className="text-sm mt-1">
+                      When big moves are expected but direction is uncertain. Straddles, Strangles, and Long Calendar Spreads can capture volatility.
+                    </p>
+                  </div>
+                </div>
+                <p className="mt-4">
+                  Use the Strategy Builder's Market Range Predictor to select your market outlook and get tailored recommendations.
+                </p>
               </>
             )}
             <p className="mt-4">
