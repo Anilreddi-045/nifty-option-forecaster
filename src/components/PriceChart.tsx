@@ -53,6 +53,27 @@ const PriceChart = ({ optionData }: PriceChartProps) => {
     };
   });
   
+  // Function to render custom dot
+  const renderDot = (props: any) => {
+    const { cx, cy, payload } = props;
+    
+    // Highlight key price points
+    if (Math.abs(payload.underlyingPrice - optionData.currentPrice) < 1 || 
+        Math.abs(payload.underlyingPrice - optionData.targetPrice) < 1 ||
+        Math.abs(payload.underlyingPrice - optionData.strikePrice) < 1) {
+      return (
+        <circle 
+          cx={cx} 
+          cy={cy} 
+          r={6} 
+          fill="#3b82f6" 
+          strokeWidth={1}
+        />
+      );
+    }
+    return null;
+  };
+  
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -137,15 +158,7 @@ const PriceChart = ({ optionData }: PriceChartProps) => {
             dataKey="optionPrice" 
             name="Option Price" 
             stroke="#3b82f6" 
-            dot={(entry, index) => {
-              // Highlight key price points
-              if (Math.abs(entry.underlyingPrice - optionData.currentPrice) < 1 || 
-                  Math.abs(entry.underlyingPrice - optionData.targetPrice) < 1 ||
-                  Math.abs(entry.underlyingPrice - optionData.strikePrice) < 1) {
-                return { r: 6, fill: "#3b82f6", strokeWidth: 1 };
-              }
-              return false; // No dot for other points
-            }}
+            dot={renderDot}
             activeDot={{ r: 8 }} 
             strokeWidth={2}
           />
