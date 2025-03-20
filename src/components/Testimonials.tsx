@@ -1,42 +1,46 @@
 
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Card, CardContent } from "@/components/ui/card";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Star } from "lucide-react";
 
 const Testimonials = () => {
   const testimonials = [
     {
       id: 1,
-      name: "Michael Johnson",
-      company: "Johnson Manufacturing",
-      text: "Working with John was a game-changer for our business. His expertise in contract law helped us restructure our supplier agreements, saving us millions while protecting our interests.",
+      name: "సురేష్ నాయుడు",
+      company: "నాయుడు ఎంటర్ప్రైజెస్",
+      text: "Working with Rama Kanth sir was a game-changer for our business. His expertise in contract law helped us restructure our supplier agreements, saving us millions while protecting our interests.",
       rating: 5,
-      initials: "MJ"
+      initials: "సు",
+      imageSrc: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80"
     },
     {
       id: 2,
-      name: "Sarah Williams",
-      company: "Williams Properties",
-      text: "I was facing a complex property dispute that threatened a major development project. John's strategic approach and deep knowledge of property law resulted in a favorable outcome that exceeded my expectations.",
+      name: "లక్ష్మి రెడ్డి",
+      company: "రెడ్డి ప్రాపర్టీస్",
+      text: "I was facing a complex property dispute that threatened a major development project. Rama Kanth sir's strategic approach and deep knowledge of property law resulted in a favorable outcome that exceeded my expectations.",
       rating: 5,
-      initials: "SW"
+      initials: "లా",
+      imageSrc: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80"
     },
     {
       id: 3,
-      name: "David Chen",
-      company: "Tech Innovations Inc.",
-      text: "When our startup faced an intellectual property challenge from a larger competitor, John provided clear guidance and skillful representation. His work was instrumental in protecting our core IP assets.",
+      name: "వెంకట్ శర్మ",
+      company: "టెక్ ఇన్నోవేషన్స్",
+      text: "When our startup faced an intellectual property challenge from a larger competitor, Rama Kanth sir provided clear guidance and skillful representation. His work was instrumental in protecting our core IP assets.",
       rating: 5,
-      initials: "DC"
+      initials: "వే",
+      imageSrc: "https://images.unsplash.com/photo-1610216705422-caa3fcb6d158?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80"
     },
     {
       id: 4,
-      name: "Emily Rodriguez",
-      company: "Rodriguez Family Trust",
-      text: "John helped our family navigate a complicated inheritance dispute with sensitivity and professionalism. His ability to simplify complex legal concepts made a difficult situation much more manageable.",
+      name: "శారద పట్నాయక్",
+      company: "పట్నాయక్ ఫ్యామిలీ ట్రస్ట్",
+      text: "Rama Kanth sir helped our family navigate a complicated inheritance dispute with sensitivity and professionalism. His ability to simplify complex legal concepts made a difficult situation much more manageable.",
       rating: 4,
-      initials: "ER"
+      initials: "శా",
+      imageSrc: "https://images.unsplash.com/photo-1607746882042-944635dfe10e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80"
     }
   ];
 
@@ -57,6 +61,7 @@ const Testimonials = () => {
                 
                 <div className="flex items-center mt-6">
                   <Avatar className="h-10 w-10 mr-4">
+                    <AvatarImage src={testimonial.imageSrc} alt={testimonial.name} />
                     <AvatarFallback className="bg-primary text-primary-foreground">
                       {testimonial.initials}
                     </AvatarFallback>
