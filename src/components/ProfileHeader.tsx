@@ -2,6 +2,8 @@
 import { UserCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Mail, Linkedin } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const ProfileHeader = () => {
   return (
@@ -11,26 +13,36 @@ const ProfileHeader = () => {
       </div>
       
       <div className="flex-1 text-center md:text-left">
-        <h1 className="text-4xl font-bold text-gray-900">John Smith, Esq.</h1>
-        <p className="text-xl text-gray-600 mt-2">Senior Legal Counsel</p>
+        <h1 className="text-4xl font-bold text-gray-900">Rama Kanth Reddy</h1>
+        <p className="text-xl text-gray-600 mt-2">Advocate, Kurnool Court</p>
         
         <div className="flex flex-wrap gap-2 mt-4 justify-center md:justify-start">
-          <Badge variant="secondary">Corporate Law</Badge>
+          <Badge variant="secondary">Criminal Law</Badge>
           <Badge variant="secondary">Civil Litigation</Badge>
           <Badge variant="secondary">Property Law</Badge>
-          <Badge variant="secondary">Contract Negotiation</Badge>
-          <Badge variant="secondary">Administrative Law</Badge>
+          <Badge variant="secondary">Family Law</Badge>
+          <Badge variant="secondary">Constitutional Law</Badge>
         </div>
         
         <p className="mt-6 text-gray-700 max-w-3xl">
-          With over 15 years of experience in corporate and civil litigation, I provide 
-          strategic legal counsel to individuals and businesses. My practice focuses on 
-          achieving favorable outcomes while maintaining the highest ethical standards.
+          With extensive experience practicing law at the Kurnool Court, I provide 
+          dedicated legal counsel to individuals and businesses across Andhra Pradesh. 
+          My practice focuses on achieving justice while maintaining the highest ethical standards.
         </p>
         
-        <div className="flex gap-4 mt-6 justify-center md:justify-start">
+        <div className="flex flex-wrap gap-4 mt-6 justify-center md:justify-start">
           <Button>Download CV</Button>
           <Button variant="outline">Book Consultation</Button>
+          <div className="flex items-center gap-4 mt-4 md:mt-0">
+            <Link to="mailto:advocate.ramakanth@gmail.com" className="flex items-center gap-2 text-gray-700 hover:text-gray-900">
+              <Mail size={20} />
+              <span className="hidden md:inline">advocate.ramakanth@gmail.com</span>
+            </Link>
+            <Link to="https://www.linkedin.com/in/ramakanthreddy" className="flex items-center gap-2 text-gray-700 hover:text-gray-900">
+              <Linkedin size={20} />
+              <span className="hidden md:inline">LinkedIn</span>
+            </Link>
+          </div>
         </div>
       </div>
     </div>

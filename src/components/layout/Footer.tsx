@@ -1,5 +1,6 @@
 
 import { Link } from "react-router-dom";
+import { Mail, Linkedin, Phone, MapPin } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -7,19 +8,33 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
-            <h3 className="text-xl font-bold mb-4">Advocate Profile</h3>
+            <h3 className="text-xl font-bold mb-4">Adv. Rama Kanth Reddy</h3>
             <p className="text-gray-300">
-              Providing expert legal counsel and representation for over 15 years. 
-              Committed to achieving the best possible outcomes for all clients.
+              Providing expert legal counsel and representation in Kurnool. 
+              Committed to achieving justice for all clients with integrity and dedication.
             </p>
           </div>
           
           <div>
             <h3 className="text-xl font-bold mb-4">Contact</h3>
-            <p className="text-gray-300">123 Legal Street</p>
-            <p className="text-gray-300">Lawton, CA 90210</p>
-            <p className="text-gray-300">Phone: (555) 123-4567</p>
-            <p className="text-gray-300">Email: contact@advocateprofile.com</p>
+            <div className="space-y-2">
+              <p className="text-gray-300 flex items-center gap-2">
+                <MapPin size={18} className="flex-shrink-0" />
+                <span>Kurnool Court Complex, Kurnool, Andhra Pradesh</span>
+              </p>
+              <p className="text-gray-300 flex items-center gap-2">
+                <Phone size={18} className="flex-shrink-0" />
+                <span>(+91) 9876543210</span>
+              </p>
+              <p className="text-gray-300 flex items-center gap-2">
+                <Mail size={18} className="flex-shrink-0" />
+                <a href="mailto:advocate.ramakanth@gmail.com" className="hover:text-white">advocate.ramakanth@gmail.com</a>
+              </p>
+              <p className="text-gray-300 flex items-center gap-2">
+                <Linkedin size={18} className="flex-shrink-0" />
+                <a href="https://www.linkedin.com/in/ramakanthreddy" className="hover:text-white">linkedin.com/in/ramakanthreddy</a>
+              </p>
+            </div>
           </div>
           
           <div>
@@ -34,7 +49,7 @@ const Footer = () => {
         </div>
         
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-          <p>&copy; {new Date().getFullYear()} Advocate Profile. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Advocate Rama Kanth Reddy. All rights reserved.</p>
         </div>
       </div>
     </footer>

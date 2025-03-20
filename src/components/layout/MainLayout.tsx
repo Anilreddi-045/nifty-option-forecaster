@@ -18,7 +18,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
         <div className="container mx-auto px-4 py-4">
           <NavigationMenu className="max-w-full w-full justify-between">
             <div className="flex items-center">
-              <h1 className="text-2xl font-bold text-gray-900 mr-6">Advocate Profile</h1>
+              <h1 className="text-2xl font-bold text-gray-900 mr-6">Adv. Rama Kanth Reddy</h1>
               <NavigationMenuList>
                 <NavigationMenuItem>
                   <Link to="/">

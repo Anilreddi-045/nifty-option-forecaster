@@ -1,15 +1,18 @@
+
 import MainLayout from "@/components/layout/MainLayout";
+import { Button } from "@/components/ui/button";
+import { Mail, Linkedin, Phone, MapPin } from "lucide-react";
 
 const Contact = () => {
   return (
     <MainLayout>
       <div className="max-w-3xl mx-auto">
-        <h1 className="text-3xl font-bold text-gray-900 mb-6">Contact Us</h1>
+        <h1 className="text-3xl font-bold text-gray-900 mb-6">Contact Adv. Rama Kanth Reddy</h1>
         
         <div className="bg-white shadow-md rounded-lg p-6 mb-8">
           <h2 className="text-xl font-semibold mb-4">Get in Touch</h2>
           <p className="text-gray-600 mb-6">
-            Have a legal question or need representation? Our team is ready to help you navigate your legal challenges.
+            Have a legal question or need representation? I'm ready to help you navigate your legal challenges.
           </p>
           
           <form className="space-y-4">
@@ -22,7 +25,7 @@ const Contact = () => {
                   type="text"
                   id="name"
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="John Doe"
+                  placeholder="Your Name"
                 />
               </div>
               
@@ -34,7 +37,7 @@ const Contact = () => {
                   type="email"
                   id="email"
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="john@example.com"
+                  placeholder="your@email.com"
                 />
               </div>
             </div>
@@ -63,12 +66,12 @@ const Contact = () => {
               ></textarea>
             </div>
             
-            <button
+            <Button
               type="submit"
               className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
             >
               Send Message
-            </button>
+            </Button>
           </form>
         </div>
         
@@ -76,12 +79,24 @@ const Contact = () => {
           <h2 className="text-xl font-semibold mb-4">Office Information</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <h3 className="font-medium text-gray-900 mb-2">Main Office</h3>
-              <p className="text-gray-600">123 Legal Street</p>
-              <p className="text-gray-600">Lawton, CA 90210</p>
-              <p className="text-gray-600 mt-2">Phone: (555) 123-4567</p>
-              <p className="text-gray-600">Email: contact@advocateprofile.com</p>
+            <div className="space-y-3">
+              <h3 className="font-medium text-gray-900 mb-2">Contact Details</h3>
+              <p className="text-gray-600 flex items-center gap-2">
+                <MapPin size={18} className="flex-shrink-0 text-gray-500" />
+                <span>Kurnool Court Complex, Kurnool, Andhra Pradesh</span>
+              </p>
+              <p className="text-gray-600 flex items-center gap-2">
+                <Phone size={18} className="flex-shrink-0 text-gray-500" />
+                <span>(+91) 9876543210</span>
+              </p>
+              <p className="text-gray-600 flex items-center gap-2">
+                <Mail size={18} className="flex-shrink-0 text-gray-500" />
+                <a href="mailto:advocate.ramakanth@gmail.com" className="hover:text-gray-900">advocate.ramakanth@gmail.com</a>
+              </p>
+              <p className="text-gray-600 flex items-center gap-2">
+                <Linkedin size={18} className="flex-shrink-0 text-gray-500" />
+                <a href="https://www.linkedin.com/in/ramakanthreddy" className="hover:text-gray-900">linkedin.com/in/ramakanthreddy</a>
+              </p>
             </div>
             
             <div>
