@@ -10,23 +10,23 @@ const ProfileHeader = () => {
     <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
       <Avatar className="w-40 h-40">
         <AvatarImage
-          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
-          alt="Rama Kanth Reddy"
+          src="/lovable-uploads/20416696-3644-416c-a351-d2fafe998994.png"
+          alt="N. Rama Kanth Reddy"
           className="object-cover"
         />
         <AvatarFallback className="text-3xl bg-primary text-primary-foreground">RKR</AvatarFallback>
       </Avatar>
       
       <div className="flex-1 text-center md:text-left">
-        <h1 className="text-4xl font-bold text-gray-900">రామ కంఠ రెడ్డి</h1>
+        <h1 className="text-4xl font-bold text-gray-900">N. Rama Kanth Reddy</h1>
         <p className="text-xl text-gray-600 mt-2">Advocate, Kurnool Court</p>
         
         <div className="flex flex-wrap gap-2 mt-4 justify-center md:justify-start">
-          <Badge variant="secondary">క్రిమినల్ లా</Badge>
-          <Badge variant="secondary">సివిల్ లిటిగేషన్</Badge>
-          <Badge variant="secondary">ప్రాపర్టీ లా</Badge>
-          <Badge variant="secondary">ఫ్యామిలీ లా</Badge>
-          <Badge variant="secondary">కాన్స్టిట్యూషనల్ లా</Badge>
+          <Badge variant="secondary">Criminal Law</Badge>
+          <Badge variant="secondary">Civil Litigation</Badge>
+          <Badge variant="secondary">Property Law</Badge>
+          <Badge variant="secondary">Family Law</Badge>
+          <Badge variant="secondary">Constitutional Law</Badge>
         </div>
         
         <p className="mt-6 text-gray-700 max-w-3xl">

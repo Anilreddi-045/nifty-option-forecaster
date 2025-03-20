@@ -9,11 +9,11 @@ const About = () => {
   return (
     <MainLayout>
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-4xl font-bold text-gray-900 mb-6">About Adv. Rama Kanth Reddy</h1>
+        <h1 className="text-4xl font-bold text-gray-900 mb-6">About Adv. N. Rama Kanth Reddy</h1>
         
         <div className="prose prose-lg max-w-none">
           <p className="lead">
-            With extensive experience in various areas of law, my practice has established a reputation for excellence, integrity, and client-focused representation in Kurnool and across Andhra Pradesh.
+            With 5+ years of experience in various areas of law, my practice has established a reputation for excellence, integrity, and client-focused representation in Kurnool and across Andhra Pradesh.
           </p>
           
           <h2>My Philosophy</h2>

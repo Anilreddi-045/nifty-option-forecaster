@@ -8,7 +8,7 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
-            <h3 className="text-xl font-bold mb-4">Adv. Rama Kanth Reddy</h3>
+            <h3 className="text-xl font-bold mb-4">Adv. N. Rama Kanth Reddy</h3>
             <p className="text-gray-300">
               Providing expert legal counsel and representation in Kurnool. 
               Committed to achieving justice for all clients with integrity and dedication.
@@ -20,7 +20,7 @@ const Footer = () => {
             <div className="space-y-2">
               <p className="text-gray-300 flex items-center gap-2">
                 <MapPin size={18} className="flex-shrink-0" />
-                <span>Kurnool Court Complex, Kurnool, Andhra Pradesh</span>
+                <span>H.NO 64-1-826, Opp. Dist Court, Near Saibaba Temple, Kurnool-518001 (A.P)</span>
               </p>
               <p className="text-gray-300 flex items-center gap-2">
                 <Phone size={18} className="flex-shrink-0" />
@@ -49,7 +49,7 @@ const Footer = () => {
         </div>
         
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-          <p>&copy; {new Date().getFullYear()} Advocate Rama Kanth Reddy. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Advocate N. Rama Kanth Reddy. All rights reserved.</p>
         </div>
       </div>
     </footer>

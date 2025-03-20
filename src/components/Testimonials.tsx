@@ -8,38 +8,38 @@ const Testimonials = () => {
   const testimonials = [
     {
       id: 1,
-      name: "సురేష్ నాయుడు",
-      company: "నాయుడు ఎంటర్ప్రైజెస్",
+      name: "Suresh Naidu",
+      company: "Naidu Enterprises",
       text: "Working with Rama Kanth sir was a game-changer for our business. His expertise in contract law helped us restructure our supplier agreements, saving us millions while protecting our interests.",
       rating: 5,
-      initials: "సు",
+      initials: "SN",
       imageSrc: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80"
     },
     {
       id: 2,
-      name: "లక్ష్మి రెడ్డి",
-      company: "రెడ్డి ప్రాపర్టీస్",
+      name: "Lakshmi Reddy",
+      company: "Reddy Properties",
       text: "I was facing a complex property dispute that threatened a major development project. Rama Kanth sir's strategic approach and deep knowledge of property law resulted in a favorable outcome that exceeded my expectations.",
       rating: 5,
-      initials: "లా",
+      initials: "LR",
       imageSrc: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80"
     },
     {
       id: 3,
-      name: "వెంకట్ శర్మ",
-      company: "టెక్ ఇన్నోవేషన్స్",
+      name: "Venkat Sharma",
+      company: "Tech Innovations",
       text: "When our startup faced an intellectual property challenge from a larger competitor, Rama Kanth sir provided clear guidance and skillful representation. His work was instrumental in protecting our core IP assets.",
       rating: 5,
-      initials: "వే",
+      initials: "VS",
       imageSrc: "https://images.unsplash.com/photo-1610216705422-caa3fcb6d158?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80"
     },
     {
       id: 4,
-      name: "శారద పట్నాయక్",
-      company: "పట్నాయక్ ఫ్యామిలీ ట్రస్ట్",
+      name: "Sharada Patnaik",
+      company: "Patnaik Family Trust",
       text: "Rama Kanth sir helped our family navigate a complicated inheritance dispute with sensitivity and professionalism. His ability to simplify complex legal concepts made a difficult situation much more manageable.",
       rating: 4,
-      initials: "శా",
+      initials: "SP",
       imageSrc: "https://images.unsplash.com/photo-1607746882042-944635dfe10e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80"
     }
   ];

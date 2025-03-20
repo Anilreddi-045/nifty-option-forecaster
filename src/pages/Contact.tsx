@@ -7,7 +7,7 @@ const Contact = () => {
   return (
     <MainLayout>
       <div className="max-w-3xl mx-auto">
-        <h1 className="text-3xl font-bold text-gray-900 mb-6">Contact Adv. Rama Kanth Reddy</h1>
+        <h1 className="text-3xl font-bold text-gray-900 mb-6">Contact Adv. N. Rama Kanth Reddy</h1>
         
         <div className="bg-white shadow-md rounded-lg p-6 mb-8">
           <h2 className="text-xl font-semibold mb-4">Get in Touch</h2>
@@ -83,7 +83,7 @@ const Contact = () => {
               <h3 className="font-medium text-gray-900 mb-2">Contact Details</h3>
               <p className="text-gray-600 flex items-center gap-2">
                 <MapPin size={18} className="flex-shrink-0 text-gray-500" />
-                <span>Kurnool Court Complex, Kurnool, Andhra Pradesh</span>
+                <span>H.NO 64-1-826, Opp. Dist Court, Near Saibaba Temple, Kurnool-518001 (A.P)</span>
               </p>
               <p className="text-gray-600 flex items-center gap-2">
                 <Phone size={18} className="flex-shrink-0 text-gray-500" />

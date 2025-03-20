@@ -19,25 +19,32 @@ const Index = () => {
         <div className="bg-white rounded-lg border shadow-sm p-6 mb-16">
           <div className="flex flex-col md:flex-row gap-6 items-center">
             <div className="md:w-1/2">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">న్యాయమైన న్యాయం కోసం పోరాడుతున్నాము</h2>
-              <p className="text-gray-700 mb-6">With over 15 years of experience in the legal field, I am dedicated to providing exceptional legal representation for clients throughout Andhra Pradesh. My approach combines thorough legal knowledge, strategic thinking, and a deep commitment to justice.</p>
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">Fighting for Fair Justice</h2>
+              <p className="text-gray-700 mb-6">With over 5 years of experience in the legal field, I am dedicated to providing exceptional legal representation for clients throughout Andhra Pradesh. My approach combines thorough legal knowledge, strategic thinking, and a deep commitment to justice.</p>
               <div className="grid grid-cols-2 gap-4">
                 <div className="bg-primary/10 p-4 rounded-lg text-center">
-                  <h3 className="text-3xl font-bold text-primary">150+</h3>
+                  <h3 className="text-3xl font-bold text-primary">50+</h3>
                   <p className="text-sm text-gray-600">Cases Won</p>
                 </div>
                 <div className="bg-primary/10 p-4 rounded-lg text-center">
-                  <h3 className="text-3xl font-bold text-primary">15+</h3>
+                  <h3 className="text-3xl font-bold text-primary">5+</h3>
                   <p className="text-sm text-gray-600">Years Experience</p>
                 </div>
               </div>
             </div>
-            <div className="md:w-1/2">
+            <div className="md:w-1/2 relative">
               <img 
                 src="https://images.unsplash.com/photo-1589578228447-e1a4e481c6c8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" 
                 alt="Justice scales and legal books" 
                 className="rounded-lg shadow-md w-full"
               />
+              <div className="absolute top-4 right-4 w-16 h-16 opacity-80">
+                <img 
+                  src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" 
+                  alt="Emblem of India - Four Lions Symbol" 
+                  className="w-full h-full"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -46,7 +53,7 @@ const Index = () => {
         <PracticeAreas />
         
         <section className="mt-16 mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8">గ్రాహకుల అభిప్రాయాలు</h2>
+          <h2 className="text-3xl font-bold text-gray-900 mb-8">Client Testimonials</h2>
           <Testimonials />
         </section>
       </div>
